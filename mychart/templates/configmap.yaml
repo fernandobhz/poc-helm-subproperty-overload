@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: poc-helm-subproperty-overload
+data:
+    modules:
+{{- range $module := $.Values.rdbsToKafka.modules }}
+        - name: {{ $module.name }}    
+          version: {{ $module.version }}
+{{- end }}
+    specs:
+{{- range $spec := $.Values.rdbsToKafka.specs }}
+        - specId: {{ $spec.specId }}    
+          a: {{ $spec.a }}
+          b: {{ $spec.b }}
+          c: {{ $spec.c }}
+{{- end }}
